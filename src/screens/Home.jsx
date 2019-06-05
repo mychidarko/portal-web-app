@@ -12,6 +12,8 @@ import News from '../components/Home/News';
 import Footer from './../components/Footer';
 
 const Home = (props) => {
+    const { linkMobile } = props;
+
     return (
         !props.hasAuth ? (
             <Redirect to="/auth/login" />
@@ -31,7 +33,7 @@ const Home = (props) => {
                     </section>
 
                     <section className="content container-fluid">
-                        <InfoBoxes />
+                        <InfoBoxes linkMobile={linkMobile} />
                         <MoneyUsage />
                         <div className="row">
                             <Expenses />

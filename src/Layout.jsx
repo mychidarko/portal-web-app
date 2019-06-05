@@ -31,6 +31,7 @@ export default class Layout extends React.Component {
             emailError: "",
             passwordError: "",
             usernameError: "",
+            success: "",
             loading: false
         }
         this.login = this.login.bind(this);
@@ -212,7 +213,7 @@ export default class Layout extends React.Component {
 
     integrateMobile(e) {
         e.preventDefault();
-        let data = JSON.stringify({ "name": "integratemobile", "param": { "email": this.state.email, "mobile_number": "0560265879" } });
+        let data = JSON.stringify({ "name": "integratemobile", "param": { "email": localStorage.getItem("portal-app-userEmail"), "mobile_number": "0560265879" } });
 
         axios({
             method: 'post',
@@ -222,10 +223,19 @@ export default class Layout extends React.Component {
             data
         })
             .then((response) => {
-                console.log(response)
+                console.log(response.data.result);
+                const mobile_number = response.data.result.mobile_number;
+                const mobile_balance = response.data.result.mobile_balance;
+
+                localStorage.setItem("portal-app-userMobileNumber", mobile_number);
+                localStorage.setItem("portal-app-userMobileBalance", mobile_balance);
+
+                this.setState({
+                    success: response.data.result.message
+                });
             })
-            .catch(() => {
-                this.setState({ error: "Invalid credentials" });
+            .catch((error) => {
+                this.setState({ error });
             });
     }
 
@@ -323,7 +333,8 @@ export default class Layout extends React.Component {
                             hasAuth={hasAuth}
                             emailError={emailError}
                             passwordError={passwordError}
-                            usernameError={usernameError} />
+                            usernameError={usernameError}
+                             />
                     )
                 }
             </React.Fragment>

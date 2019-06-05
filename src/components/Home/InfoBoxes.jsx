@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const InfoBoxes = () => {
+const InfoBoxes = (props) => {
     const totalFunds = localStorage.getItem("portal-app-userBalance");
     const mobileFunds = localStorage.getItem("portal-app-userMobileBalance");
     const cryptoFunds = localStorage.getItem("portal-app-userCryptoBalance");
+
+    const {linkMobile} = props;
 
     return ( 
         <React.Fragment>
@@ -30,7 +32,11 @@ const InfoBoxes = () => {
 
                         <div className="info-box-content">
                             <span className="info-box-text">Mobile Wallet</span>
-                            <span className="info-box-number">GH¢ <small>{mobileFunds}</small></span>
+                            <span className="info-box-number">
+                                {mobileFunds === "unlinked" ? (
+                                    <small><Link onClick={linkMobile} to="#" style={{ color: "black" }}>click to add mobile wallet</Link></small>
+                                ) : <React.Fragment>GH¢ <small>{mobileFunds}</small></React.Fragment>}
+                            </span>
                         </div>
                     </div>
                 </div>
