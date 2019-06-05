@@ -43,3 +43,15 @@
         margin-bottom: 40px;
     }
 }
+
+.login-page-logo {
+    width: 50px; 
+    height: 50px;
+    margin-bottom: 40px;
+}
+
+.register-page-logo {
+    width: 50px; 
+    height: 50px;
+    margin-bottom: 40px;
+}
