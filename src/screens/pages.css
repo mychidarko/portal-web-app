@@ -28,8 +28,16 @@
 }
 
 .start-slider {
+    position: relative;
     height: 380px !important;
     margin-bottom: 30px;
+    clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 calc(100% - 5vw)
+  );
+  background-image: linear-gradient(#7eb6f7, #266bff);
 }
 
 .start-buttons {
@@ -64,6 +72,8 @@
 
     .start-captions {
         margin-top: -220px;
-        margin-bottom:  250px;
+        margin-bottom:  210px;
+        color: white;
+        position: relative;
     }
 }

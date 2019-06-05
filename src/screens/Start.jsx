@@ -20,13 +20,11 @@ function StartComponent() {
             <center>
                 <img src={Logo} className="start-logo" />
             </center>
-            <div className="start-slider">
-                
-            </div>
+            <div className="start-slider"></div>
             <center className="start-captions">
                 <p className="h1">This is Portal Online</p>
                 <p>
-
+                    Secure all your wallets in one place
                 </p>
             </center>
             <div className="start-buttons">
