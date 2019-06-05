@@ -6,8 +6,6 @@ const InfoBoxes = (props) => {
     const mobileFunds = localStorage.getItem("portal-app-userMobileBalance");
     const cryptoFunds = localStorage.getItem("portal-app-userCryptoBalance");
 
-    const {linkMobile} = props;
-
     return ( 
         <React.Fragment>
             <div className="row">
@@ -34,7 +32,7 @@ const InfoBoxes = (props) => {
                             <span className="info-box-text">Mobile Wallet</span>
                             <span className="info-box-number">
                                 {mobileFunds === "unlinked" ? (
-                                    <small><Link onClick={linkMobile} to="#" style={{ color: "black" }}>click to add mobile wallet</Link></small>
+                                    <small><Link to="/settings/link-mobile" style={{ color: "black" }}>click to add mobile wallet</Link></small>
                                 ) : <React.Fragment>GH¢ <small>{mobileFunds}</small></React.Fragment>}
                             </span>
                         </div>

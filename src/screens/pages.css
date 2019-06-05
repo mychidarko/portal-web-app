@@ -68,6 +68,7 @@
 
     .start-slider {
         width: 100%;
+        margin-top: -20px;
     }
 
     .start-captions {
@@ -75,5 +76,9 @@
         margin-bottom:  210px;
         color: white;
         position: relative;
+    }
+
+    .start-buttons {
+        margin-bottom: 30px;
     }
 }

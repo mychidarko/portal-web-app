@@ -30,9 +30,9 @@
         margin-top: -100px;
     }
 
-    .form-control {
+    .form-control, .input-group-addon {
         border: none;
-        border-bottom:  1px solid black;
+        border-bottom:  1px solid black !important;
     }
 
     .btn-google {

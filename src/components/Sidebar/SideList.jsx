@@ -19,6 +19,12 @@ export default function SideList() {
                 </NavLink>
             </li>
 
+            <li>
+                <NavLink to="/settings/link-mobile" className="ajax">
+                    <i className="fa fa-line-chart"></i> <span>Link Mobile</span>
+                </NavLink>
+            </li>
+
             <li className="treeview">
                 <a href=".">
                     <i className="fa fa-area-chart"></i> <span>Transaction Panel</span>

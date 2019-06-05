@@ -12,7 +12,6 @@ import News from '../components/Home/News';
 import Footer from './../components/Footer';
 
 const Home = (props) => {
-    const { linkMobile } = props;
 
     return (
         !props.hasAuth ? (
@@ -33,7 +32,7 @@ const Home = (props) => {
                     </section>
 
                     <section className="content container-fluid">
-                        <InfoBoxes linkMobile={linkMobile} />
+                        <InfoBoxes />
                         <MoneyUsage />
                         <div className="row">
                             <Expenses />

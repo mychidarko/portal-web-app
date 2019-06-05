@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import "./styles/layout.css";
 
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import RightSideBar from './components/RightSideBar';
 
 import Index from './screens/Index';
 import Home from './screens/Home';
@@ -14,6 +15,7 @@ import Start from './screens/Start';
 import Deposit from './screens/Deposit/Deposit';
 import Interwallet from './screens/InterWallet';
 import Send from './screens/Send';
+import LinkMobile from './screens/LinkMobile';
 import Login from './screens/auth/Login';
 import Register from './screens/auth/Register';
 
@@ -32,6 +34,7 @@ export default class Layout extends React.Component {
             passwordError: "",
             usernameError: "",
             success: "",
+            mobile: "",
             loading: false
         }
         this.login = this.login.bind(this);
@@ -214,7 +217,8 @@ export default class Layout extends React.Component {
 
     integrateMobile(e) {
         e.preventDefault();
-        let data = JSON.stringify({ "name": "integratemobile", "param": { "email": localStorage.getItem("portal-app-userEmail"), "mobile_number": "0560265879" } });
+        console.log(localStorage.getItem("portal-app-token"))
+        let data = JSON.stringify({ "name": "integratemobile", "param": { "email": localStorage.getItem("portal-app-userEmail"), "mobile_number": this.state.mobile } });
 
         axios({
             method: 'post',
@@ -234,9 +238,12 @@ export default class Layout extends React.Component {
                 this.setState({
                     success: response.data.result.message
                 });
+
+                return <Redirect to="/home" />;
             })
             .catch((error) => {
                 this.setState({ error });
+                console.log(error);
             });
     }
 
@@ -295,7 +302,10 @@ export default class Layout extends React.Component {
             password: "",
             username: "",
             password2: "",
-            error: ""
+            error: "",
+            mobile: "",
+            loading: false,
+            success: ""
         });
     }
 
@@ -306,17 +316,22 @@ export default class Layout extends React.Component {
     }
 
     render() {
-        const { hasAuth, username, email, password, error, password2, loading, emailError, passwordError, usernameError} = this.state;
+        const { hasAuth, username, email, password, error, password2, loading, emailError, passwordError, usernameError, success, mobile} = this.state;
+        
 
         return (
             <React.Fragment>
                 {hasAuth ? <div className="hidden-md"><Header brandText="Portal" hasAuth={hasAuth} logout={this.logout} /></div> : null}
                 {hasAuth ? <Sidebar hasAuth={hasAuth} /> : null}
+                <RightSideBar />
                 {hasAuth ? (
                     <div className="main-panel">
                         <RouterView
                             hasAuth={hasAuth}
-                            linkMobile={this.integrateMobile} />
+                            linkMobile={this.integrateMobile}
+                            success={success}
+                            onchangeText={this.onchangeText}
+                            mobile={mobile} />
                     </div>
 
                 ) : (
@@ -345,7 +360,9 @@ export default class Layout extends React.Component {
 
 
 function RouterView(props) {
-    const { hasAuth, username, email, password, password2, error, login, register, onchangeText, loading, linkMobile, emailError, passwordError, usernameError } = props;
+    const { hasAuth, username, email, password, password2, error, login, register, onchangeText, loading, linkMobile, emailError, passwordError, usernameError, mobile, success } = props;
+
+    
 
     return (
         <Switch>
@@ -354,11 +371,11 @@ function RouterView(props) {
                 return <Start hasAuth={hasAuth} />
             }} />
             <Route path="/home" render={() => {
-                return <Home hasAuth={hasAuth} linkMobile={linkMobile} />
+                return <Home hasAuth={hasAuth} />
             }} />
-            {/* <Route exact path="/users/me" render={() => {
-                return <Profile hasAuth={hasAuth} />
-            }} /> */}
+            <Route path="/settings/link-mobile" render={() => {
+                return <LinkMobile mobile={mobile} onchangeText={onchangeText} success={success} linkMobile={linkMobile}  />
+            }} />
             <Route path="/deposit" render={() => {
                 return <Deposit hasAuth={hasAuth} />
             }} />
