@@ -14,7 +14,7 @@ class Notifications extends Component {
     render() { 
         return (
             !this.props.hasAuth ? (
-                <Redirect to="/login" />
+                <Redirect to="/auth/login" />
             ) : (
                 <div className="content-wrapper">
                     <section className="content-header hidden-xs">

@@ -19,7 +19,7 @@ class Send extends Component {
     render() { 
         return (
             !this.props.hasAuth ? (
-                <Redirect to="/login" />
+                <Redirect to="/auth/login" />
             ) : (
                 <div className="wrapper">
                     <div className="content-wrapper">

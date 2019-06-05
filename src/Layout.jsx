@@ -350,10 +350,10 @@ function RouterView(props) {
             <Route path="/deposit" render={() => {
                 return <Deposit hasAuth={hasAuth} />
             }} />
-            <Route path="/trans/interwallet" render={() => {
+            <Route path="/interwallet" render={() => {
                 return <Interwallet hasAuth={hasAuth} />
             }} />
-            <Route path="/trans/send" render={() => {
+            <Route path="/send" render={() => {
                 return <Send hasAuth={hasAuth} />
             }} />
             <Route path="/auth/login" render={() => {
