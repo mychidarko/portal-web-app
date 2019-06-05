@@ -1,0 +1,45 @@
+@media only screen and (max-width: 400px) {
+    .login-box {
+        margin-top: 100px;
+        background: white !important;
+        height: 100%;
+        width: 100%;
+    }
+
+    .login-page {
+        background: white !important;
+    }
+
+    .login-page-logo {
+        width: 50px; 
+        height: 50px;
+        margin-top: -45px;
+        margin-bottom: 100px;
+        margin-top: -10px;
+    }
+
+    .register-page-logo {
+        width: 50px; 
+        height: 50px;
+        margin-top: -20px !important;
+        margin-bottom: 80px;
+        margin-top: -10px;
+    }
+
+    .alert-danger {
+        margin-top: -100px;
+    }
+
+    .form-control {
+        border: none;
+        border-bottom:  1px solid black;
+    }
+
+    .btn-google {
+        margin-bottom: 70px;
+    }
+
+    .register-btn-google {
+        margin-bottom: 40px;
+    }
+}
