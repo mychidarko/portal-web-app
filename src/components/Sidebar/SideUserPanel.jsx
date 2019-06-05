@@ -15,13 +15,15 @@ export default class SideUserPanel extends React.Component {
     }
 
     render() {
+        const username = localStorage.getItem("portal-app-userName");
+
         return (
             <div className="user-panel">
                 <div className="pull-left image">
                     <img src={Avatar} className="img-circle" alt="User Profile" />
                 </div>
                 <div className="pull-left info">
-                    <p>{this.props.username}</p>
+                    <p>{username}</p>
                     <a href=".">
                         <DisplayNetStat online={this.state.online} />
                     </a>

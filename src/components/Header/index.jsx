@@ -66,7 +66,7 @@ export default function Header(props) {
                                     <NavMessages />
                                     <NavNotifications />
                                     <NavTasks />
-                                    <NavUser onLogout={onLogout} />
+                                    <NavUser logout={props.logout} />
                                 </React.Fragment>
                             ) : (
                                     <React.Fragment>

@@ -269,6 +269,15 @@ export default class Layout extends React.Component {
 
     logout() {
         localStorage.removeItem('portal-app-token');
+
+        localStorage.removeItem('portal-app-userId');
+        localStorage.removeItem('portal-app-userName');
+        localStorage.removeItem('portal-app-userEmail');
+        localStorage.removeItem('portal-app-userMobileNumber');
+        localStorage.removeItem('portal-app-userBalance');
+        localStorage.removeItem('portal-app-userMobileBalance');
+        localStorage.removeItem('portal-app-userCryptoBalance');
+
         this.setState({
             hasAuth: false,
             email: "",
@@ -290,7 +299,7 @@ export default class Layout extends React.Component {
 
         return (
             <React.Fragment>
-                {hasAuth ? <div className="hidden-md"><Header brandText="Portal" hasAuth={hasAuth} /></div> : null}
+                {hasAuth ? <div className="hidden-md"><Header brandText="Portal" hasAuth={hasAuth} logout={this.logout} /></div> : null}
                 {hasAuth ? <Sidebar hasAuth={hasAuth} /> : null}
                 {hasAuth ? (
                     <div className="main-panel">

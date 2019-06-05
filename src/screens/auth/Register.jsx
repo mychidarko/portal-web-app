@@ -62,8 +62,7 @@ export default function Register(props) {
                     </div>
 
                     <center className="center">
-                        <Link to="/auth/forgot-password" className="text-center">I forgot my password</Link><br />
-                        <Link to="/auth/register" className="text-center">I don't have an account</Link>
+                        <Link to="/auth/login" className="text-center">I already have an account</Link>
                     </center>
                 </div>
             </div>

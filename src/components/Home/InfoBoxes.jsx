@@ -2,6 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const InfoBoxes = () => {
+    const totalFunds = localStorage.getItem("portal-app-userBalance");
+    const mobileFunds = localStorage.getItem("portal-app-userMobileBalance");
+    const cryptoFunds = localStorage.getItem("portal-app-userCryptoBalance");
+
     return ( 
         <React.Fragment>
             <div className="row">
@@ -13,7 +17,7 @@ const InfoBoxes = () => {
                         
                         <div className="info-box-content">
                             <span className="info-box-text">Total Funds</span>
-                            <span className="info-box-number">GH¢ <small>0.50</small></span>
+                            <span className="info-box-number">GH¢ <small>{totalFunds}</small></span>
                         </div>
                     </div>
                 </div>
@@ -26,7 +30,7 @@ const InfoBoxes = () => {
 
                         <div className="info-box-content">
                             <span className="info-box-text">Mobile Wallet</span>
-                            <span className="info-box-number">GH¢ <small>0.00</small></span>
+                            <span className="info-box-number">GH¢ <small>{mobileFunds}</small></span>
                         </div>
                     </div>
                 </div>
@@ -41,7 +45,7 @@ const InfoBoxes = () => {
 
                     <div className="info-box-content">
                       <span className="info-box-text">Crypto Wallet</span>
-                      <span className="info-box-number">FLASH <small>10.00</small></span>
+                      <span className="info-box-number">FLASH <small>{cryptoFunds}</small></span>
                     </div>
                   </div>
                 </div>
