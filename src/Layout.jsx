@@ -79,7 +79,7 @@ export default class Layout extends React.Component {
             axios({
                 method: 'post',
                 // url: "http://localhost/portalonlineapi/api/v1/index.php",
-                url: "http://portalonlineapi.000webhostapp.com/api/v1/",
+                url: "https://portalonlineapi.000webhostapp.com/api/v1/",
                 config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
                 data
             })
@@ -154,7 +154,7 @@ export default class Layout extends React.Component {
             axios({
                 method: 'post',
                 // url: "http://localhost/portalonlineapi/api/v1/",
-                url: "http://portalonlineapi.000webhostapp.com/api/v1/",
+                url: "https://portalonlineapi.000webhostapp.com/api/v1/",
                 config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
                 data
             })
@@ -198,7 +198,7 @@ export default class Layout extends React.Component {
         axios({
             method: 'post',
             // url: "http://localhost/portalonlineapi/api/v1/",
-            url: "http://portalonlineapi.000webhostapp.com/api/v1/",
+            url: "https://portalonlineapi.000webhostapp.com/api/v1/",
             config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
             data
         })
@@ -217,7 +217,7 @@ export default class Layout extends React.Component {
         axios({
             method: 'post',
             // url: "http://localhost/portalonlineapi/api/v1/",
-            url: "http://portalonlineapi.000webhostapp.com/api/v1/",
+            url: "https://portalonlineapi.000webhostapp.com/api/v1/",
             config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
             data
         })
@@ -236,7 +236,7 @@ export default class Layout extends React.Component {
         axios({
             method: 'post',
             // url: "http://localhost/portalonlineapi/api/v1/",
-            url: "http://portalonlineapi.000webhostapp.com/api/v1/",
+            url: "https://portalonlineapi.000webhostapp.com/api/v1/",
             config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
             data
         })
@@ -255,7 +255,7 @@ export default class Layout extends React.Component {
         axios({
             method: 'post',
             // url: "http://localhost/portalonlineapi/api/v1/",
-            url: "http://portalonlineapi.000webhostapp.com/api/v1/",
+            url: "https://portalonlineapi.000webhostapp.com/api/v1/",
             config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
             data
         })
