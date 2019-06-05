@@ -4,9 +4,9 @@ import { Link, Redirect } from 'react-router-dom';
 import './pages.css';
 import Logo from './../assets/img/logo.png';
 
-import One from './../assets/img/anotherbg.jpg';
-import Two from './../assets/img/coolbg.jpg';
-import Three from './../assets/img/loginbg.jpg';
+// import One from './../assets/img/anotherbg.jpg';
+// import Two from './../assets/img/coolbg.jpg';
+// import Three from './../assets/img/loginbg.jpg';
 
 export default function Start(props) {
     return props.hasAuth ? <Redirect to="/home" /> :  (
@@ -18,7 +18,7 @@ function StartComponent() {
     return (
         <div>
             <center>
-                <img src={Logo} className="start-logo" />
+                <img src={Logo} className="start-logo" alt="start logo" />
             </center>
             <div className="start-slider"></div>
             <center className="start-captions">

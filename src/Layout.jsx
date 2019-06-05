@@ -149,7 +149,7 @@ export default class Layout extends React.Component {
             this.setState({ passwordError: "the passwords don't match !!" });
             this.setState({ loading: false });
             setTimeout(() => {
-                this.setState({ error: "" })
+                this.setState({ passwordError: "" })
             }, 3000);
         } else {
             axios({
@@ -181,6 +181,7 @@ export default class Layout extends React.Component {
                         localStorage.setItem('portal-app-userMobileBalance', mobile_balance);
                         localStorage.setItem('portal-app-userCryptoBalance', crypto_balance);
 
+                        this.setState({ loading: false });
                         this.setState({ hasAuth: true });
                     } else {
                         this.setState({ error: "An error occured" });

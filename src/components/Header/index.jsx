@@ -35,7 +35,7 @@ class DisplayConn extends React.Component {
 }
 
 export default function Header(props) {
-    const {hasAuth, onLogout} = props;
+    const {hasAuth} = props;
     return (
         <React.Fragment>
             <header className="main-header">
