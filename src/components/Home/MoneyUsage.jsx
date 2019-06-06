@@ -44,8 +44,10 @@ const MoneyUsage = () => {
                     </h6>
                   </span>
 
-                  <div className="chart">
-                    <canvas id="salesChart" style={{ height: 180 }}></canvas>
+                  <div className="container-fluid">
+                    <div className="chart">
+                      <canvas id="salesChart" style={{ height: 200, width: "100%" }}></canvas>
+                    </div>
                   </div>
                 </div>
               </div>

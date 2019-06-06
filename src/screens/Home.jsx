@@ -33,12 +33,21 @@ const Home = (props) => {
 
                     <section className="content container-fluid">
                         <InfoBoxes />
-                        <MoneyUsage />
                         <div className="row">
-                            <Expenses />
-                            <Contacts />
-                            <RequestCash />
+                            <div className="col-lg-9 col-md-9 col-sm-6 col-xs-12">
+                                <MoneyUsage />
+                            </div>
+                            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <Contacts />
+                            </div>
                         </div>
+                        
+                        <div className="row">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <Expenses />
+                                </div>
+                        </div>
+                        <br/>
                         <News />
                     </section>
                 </div>
