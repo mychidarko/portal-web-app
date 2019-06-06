@@ -1,6 +1,8 @@
 import React from 'react'
 
-const Form = () => {
+const Form = props => {
+    // const { interwallet, amount, onchangeText, transferFrom, transferTo, password, loading, success, error } = props;
+
     return ( 
         <div className="col-md-6 col-xs-12 col-sm-12 col-lg-5">
             <div className="box box-default">

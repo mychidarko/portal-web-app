@@ -1,5 +1,5 @@
 {
-  "short_name": "Portal Online",
+  "short_name": "Portal",
   "name": "Portal Online",
   "icons": [
     {
@@ -17,5 +17,8 @@
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "scope": "/"
+  "scope": "/",
+  "version": "1.1.0",
+  "author": "Mychi Darko",
+  "version_name": "hope"
 }

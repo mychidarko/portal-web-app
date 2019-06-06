@@ -35,7 +35,9 @@ export default class Layout extends React.Component {
             usernameError: "",
             success: "",
             mobile: "",
-            loading: false
+            loading: false,
+            transferFrom: "",
+            transferTo: "",
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -259,7 +261,7 @@ export default class Layout extends React.Component {
             data
         })
             .then((response) => {
-                console.log(response)
+                console.log(response.data)
             })
             .catch(() => {
                 this.setState({ error: "Invalid credentials" });
@@ -268,21 +270,57 @@ export default class Layout extends React.Component {
 
     interWallet(e) {
         e.preventDefault();
-        let data = JSON.stringify({ "name": "interwallet", "param": { "email": this.state.email, "wallet_to": "crypto", "to_id": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9", "wallet_from": "mobile_money", "from_id": "0560265879", "amount": this.state.amount } });
+        let data = JSON.stringify({ "name": "interwallet", "param": { "email": localStorage.getItem("portal-app-userEmail"), "wallet_to": this.state.transferTo, "to_id": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9", "wallet_from": this.state.transferFrom, "from_id": localStorage.getItem("portal-app-userMobileNumber"), "amount": this.state.amount } });
 
-        axios({
-            method: 'post',
-            // url: "http://localhost/portalonlineapi/api/v1/",
-            url: "https://portalonlineapi.000webhostapp.com/api/v1/",
-            config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
-            data
-        })
+        if(this.state.amount === "") {
+            this.setState({ error: "Please enter amount" });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
+        } else if(this.state.transferFrom === "transfer_from" || this.state.transferFrom === "") {
+            this.setState({ error: "Select a wallet to transfer funds from" });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
+        } else if (this.state.transferTo === "transfer_to" || this.state.transferTo === "") {
+            this.setState({ error: "Select a wallet to transfer funds to" });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
+        } else if (this.state.password === "") {
+            this.setState({ error: "Please enter your password" });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
+        } else {
+            this.setState({ loading: true });
+
+            axios({
+                method: 'post',
+                // url: "http://localhost/portalonlineapi/api/v1/",
+                url: "https://portalonlineapi.000webhostapp.com/api/v1/",
+                config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
+                data
+            })
             .then((response) => {
-                console.log(response)
+                console.log(response.data);
+                if (response.data.status === 103) {
+                    this.setState({ error: response.data.message });
+                    setTimeout(() => {
+                        this.setState({ error: "" });
+                    }, 3000);
+                    this.setState({ loading: false });
+                } else if(response.data.status === 200) {
+                    this.setState({ 
+                        success: response.data.result.message,
+                        loading: false
+                    });
+                }
             })
             .catch(() => {
                 this.setState({ error: "Invalid credentials" });
             });
+        }
     }
 
     logout() {
@@ -316,7 +354,7 @@ export default class Layout extends React.Component {
     }
 
     render() {
-        const { hasAuth, username, email, password, error, password2, loading, emailError, passwordError, usernameError, success, mobile} = this.state;
+        const { hasAuth, username, email, password, error, password2, loading, emailError, passwordError, usernameError, success, mobile, amount, transferFrom, transferTo} = this.state;
         
 
         return (
@@ -331,7 +369,14 @@ export default class Layout extends React.Component {
                             linkMobile={this.integrateMobile}
                             success={success}
                             onchangeText={this.onchangeText}
-                            mobile={mobile} />
+                            mobile={mobile}
+                            interwallet={this.interWallet} 
+                            amount={amount} 
+                            transferFrom={transferFrom} 
+                            transferTo={transferTo} 
+                            password={password} 
+                            loading={loading} 
+                            error={error} />
                     </div>
 
                 ) : (
@@ -360,9 +405,7 @@ export default class Layout extends React.Component {
 
 
 function RouterView(props) {
-    const { hasAuth, username, email, password, password2, error, login, register, onchangeText, loading, linkMobile, emailError, passwordError, usernameError, mobile, success } = props;
-
-    
+    const { hasAuth, username, email, password, password2, error, login, register, onchangeText, loading, linkMobile, emailError, passwordError, usernameError, mobile, success, amount, transferFrom, transferTo, interwallet } = props;
 
     return (
         <Switch>
@@ -380,7 +423,7 @@ function RouterView(props) {
                 return <Deposit hasAuth={hasAuth} />
             }} />
             <Route path="/interwallet" render={() => {
-                return <Interwallet hasAuth={hasAuth} />
+                return <Interwallet interwallet={interwallet} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} />
             }} />
             <Route path="/send" render={() => {
                 return <Send hasAuth={hasAuth} />

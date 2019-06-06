@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Form = props => {
-    const { onSubmit } = props;
+    const { interwallet, amount, onchangeText, transferFrom, transferTo, password, loading, success, error } = props;
+    const mobileMoney = localStorage.getItem("portal-app-userMobileBalance");
+
     return ( 
         <React.Fragment>
             <div className="mobile hidden-md hidden-lg m-2">
@@ -10,52 +13,76 @@ const Form = props => {
             
             <div className="col-md-6 col-xs-12 col-sm-7 col-lg-5">
 
+                { error ? <div className="alert alert-danger">{error}</div> : null}
+                { success ? <div className="alert alert-success">{success}</div> : null}
+
                 <div className="box box-primary">
                     <div className="box-header with-border">
                         <h3 className="box-title">Transaction Form <i className="fa fa-home"></i></h3>
                     </div>
-                    <form onSubmit={onSubmit} className="box-body">
+                    <form onSubmit={interwallet} className="box-body">
+                        {mobileMoney === "unlinked" ? (
+                            <React.Fragment>
+                                <h2>You have not linked your mobile wallet, hence you cannot use this transfer</h2>
+                                <br />
+                                <Link to="/settings/link-mobile">Link your mobile wallett here</Link>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
 
-                        <div className="input-group">
-                            <span className="input-group-addon">GH¢</span>
-                            <input type="number" className="form-control" placeholder="Amount you want to send"/>
-                            <span className="input-group-addon">.00</span>
-                        </div>
-                        <br />
+                                <div className="input-group">
+                                    <span className="input-group-addon">GH¢</span>
+                                    <input type="number" className="form-control" placeholder="Amount you want to send" name="amount" value={amount} onChange={onchangeText} />
+                                    <span className="input-group-addon">.00</span>
+                                </div>
+                                <br />
 
-                        <h4>Account Information <i className="fa fa-user"></i></h4>
+                                <h4>Account Information <i className="fa fa-user"></i></h4>
+                                
+                                <div className="input-group">
+                                    <span className="input-group-addon"><i className="fa fa-credit-card"></i></span>
+                                    <select className="form-control" value={transferFrom} onChange={onchangeText} name="transferFrom">
+                                        <option value="transfer_from">Transfer from</option>
+                                        <option value="mobile">Mobile Wallet</option>
+                                        <option value="crypto">Crypto Wallet</option>
+                                    </select>
+                                </div>
+                                <br/>
 
-                        <div className="input-group">
-                            <span className="input-group-addon"><i className="fa fa-credit-card"></i></span>
-                            <select name="account-from" className="form-control">
-                                <option>Transfer from</option>
-                                <option>Mobile Wallet</option>
-                                <option>Crypto Wallet</option>
-                            </select>
-                        </div>
-                        <br/>
+                                { transferFrom === "mobile" ? (
+                                    <React.Fragment>
+                                        <div className="input-group">
+                                            <span className="input-group-addon"><i className="fa fa-mobile"></i></span>
+                                            <input type="number" className="form-control" placeholder="Mobile Money PIN" name="pin" />
+                                        </div>
+                                        <br/>
+                                    </React.Fragment>
+                                ) : null }
 
-                        <div className="input-group">
-                            <span className="input-group-addon"><i className="fa fa-credit-card"></i></span>
-                            <select name="account-from" className="form-control">
-                                <option>Transfer to</option>
-                                <option>Crypto Wallet</option>
-                                <option>Mobile Wallet</option>
-                            </select>
-                        </div>
-                        <br/>
+                                <div className="input-group">
+                                    <span className="input-group-addon"><i className="fa fa-credit-card"></i></span>
+                                    <select className="form-control" value={transferTo} onChange={onchangeText} name="transferTo">
+                                        <option value="transfer_to">Transfer to</option>
+                                        <option value="crypto">Crypto Wallet</option>
+                                        <option value="mobile">Mobile Wallet</option>
+                                    </select>
+                                </div>
+                                <br/>
+                                    
+                                <h4>Confirm Transaction <i className="fa fa-check"></i></h4>
 
-                        <h4>Confirm Transaction <i className="fa fa-check"></i></h4>
+                                <div className="input-group">
+                                    <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                                    <input type="password" name="password" value={password} onChange={onchangeText} className="form-control" placeholder="Enter your password to continue"/>
+                                </div>
+                                <br/>
 
-                        <div className="input-group">
-                            <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                            <input type="password" className="form-control" placeholder="Enter your password to continue"/>
-                        </div>
-                        <br/>
+                                <button type="submit" className="btn btn-block btn-primary btn-lg">
+                                        {loading ? <i className="fa fa-refresh fa-spin"></i> : <React.Fragment><i className="fa fa-send"></i> Send Cash</React.Fragment> }
+                                </button>
 
-                        <button type="submit" className="btn btn-block btn-primary btn-lg">
-                            <i className="fa fa-spin"></i> Send Cash
-                        </button>
+                            </React.Fragment>
+                        )}
 
                     </form>
                 </div>
