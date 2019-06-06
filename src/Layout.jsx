@@ -230,24 +230,24 @@ export default class Layout extends React.Component {
             config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
             data
         })
-            .then((response) => {
-                console.log(response.data.result);
-                const mobile_number = response.data.result.mobile_number;
-                const mobile_balance = response.data.result.mobile_balance;
+        .then((response) => {
+            console.log(response.data.result);
+            const mobile_number = response.data.result.mobile_number;
+            const mobile_balance = response.data.result.mobile_balance;
 
-                localStorage.setItem("portal-app-userMobileNumber", mobile_number);
-                localStorage.setItem("portal-app-userMobileBalance", mobile_balance);
+            localStorage.setItem("portal-app-userMobileNumber", mobile_number);
+            localStorage.setItem("portal-app-userMobileBalance", mobile_balance);
 
-                this.setState({
-                    success: response.data.result.message
-                });
-
-                return <Redirect to="/home" />;
-            })
-            .catch((error) => {
-                this.setState({ error });
-                console.log(error);
+            this.setState({
+                success: response.data.result.message
             });
+            setTimeout(() => {
+                this.setState({ success: "" });
+            }, 3000);
+        })
+        .catch(() => {
+            this.setState({ error: "Network error" });
+        });
     }
 
     sendCash(e) {
@@ -288,6 +288,12 @@ export default class Layout extends React.Component {
                 console.log(response.data);
                 if (response.data.status === 103) {
                     this.setState({ error: response.data.message });
+                    setTimeout(() => {
+                        this.setState({ error: "" });
+                    }, 3000);
+                    this.setState({ loading: false });
+                } else if (response.data.status === 107) {
+                    this.setState({ error: "Internal Server Error" });
                     setTimeout(() => {
                         this.setState({ error: "" });
                     }, 3000);
