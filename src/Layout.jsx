@@ -315,10 +315,17 @@ export default class Layout extends React.Component {
                         success: response.data.result.message,
                         loading: false
                     });
+                    setTimeout(() => {
+                        this.setState({ success: "" });
+                    }, 4000);
                 }
             })
-            .catch(() => {
-                this.setState({ error: "Invalid credentials" });
+            .catch((error) => {
+                this.setState({ error: "You're currently offline, please retry when connected" });
+                this.setState({ loading: false });
+                setTimeout(() => {
+                    this.setState({ error: "" });
+                }, 3000);
             });
         }
     }
