@@ -38,6 +38,7 @@ export default class Layout extends React.Component {
             loading: false,
             transferFrom: "",
             transferTo: "",
+            emailTo: ""
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -251,7 +252,7 @@ export default class Layout extends React.Component {
 
     sendCash(e) {
         e.preventDefault();
-        let data = JSON.stringify({ "name": "send", "param": { "email_from": localStorage.getItem("portal-app-userEmail"), "wallet_to": this.state.transferTo, "to_id": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9", "wallet_from": this.state.transferFrom, "from_id": localStorage.getItem("portal-app-userMobileNumber"), "amount": this.state.amount } });
+        let data = JSON.stringify({ "name": "send", "param": { "email_from": localStorage.getItem("portal-app-userEmail"), "email_to": this.state.emailTo, "wallet_to": this.state.transferFrom, "wallet_from": this.state.transferFrom, "amount": this.state.amount } });
 
         if (this.state.amount === "") {
             this.setState({ error: "Please enter amount" });
@@ -263,8 +264,8 @@ export default class Layout extends React.Component {
             setTimeout(() => {
                 this.setState({ error: "" });
             }, 3000);
-        } else if (this.state.transferTo === "transfer_to" || this.state.transferTo === "") {
-            this.setState({ error: "Select a wallet to transfer funds to" });
+        } else if (this.state.emailTo === "") {
+            this.setState({ error: "Please enter an email to transfer funds to" });
             setTimeout(() => {
                 this.setState({ error: "" });
             }, 3000);
@@ -404,7 +405,7 @@ export default class Layout extends React.Component {
     }
 
     render() {
-        const { hasAuth, username, email, password, error, password2, loading, emailError, passwordError, usernameError, success, mobile, amount, transferFrom, transferTo} = this.state;
+        const { hasAuth, username, email, password, error, password2, loading, emailError, passwordError, usernameError, success, mobile, amount, transferFrom, transferTo, emailTo } = this.state;
         
 
         return (
@@ -427,7 +428,8 @@ export default class Layout extends React.Component {
                             transferTo={transferTo} 
                             password={password} 
                             loading={loading} 
-                            error={error} />
+                            error={error}
+                            emailTo={emailTo} />
                     </div>
 
                 ) : (
@@ -456,7 +458,7 @@ export default class Layout extends React.Component {
 
 
 function RouterView(props) {
-    const { hasAuth, username, email, password, password2, error, login, register, onchangeText, loading, linkMobile, emailError, passwordError, usernameError, mobile, success, amount, transferFrom, transferTo, interwallet, send } = props;
+    const { hasAuth, username, email, password, password2, error, login, register, onchangeText, loading, linkMobile, emailError, passwordError, usernameError, mobile, success, amount, transferFrom, transferTo, interwallet, send, emailTo } = props;
 
     return (
         <Switch>
@@ -477,7 +479,7 @@ function RouterView(props) {
                 return <Interwallet interwallet={interwallet} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} />
             }} />
             <Route path="/send" render={() => {
-                return <Send send={send} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} />
+                return <Send send={send} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} emailTo={emailTo} password={password} loading={loading} success={success} error={error} />
             }} />
             <Route path="/auth/login" render={() => {
                 return <Login hasAuth={hasAuth} login={login} error={error} onchangeText={onchangeText} email={email} password={password} loading={loading} emailError={emailError} passwordError={passwordError} />

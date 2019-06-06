@@ -17,7 +17,7 @@ class Send extends Component {
         }
     }
     render() { 
-        const { send, amount, onchangeText, transferFrom, transferTo, password, loading, success, error } = this.props;  
+        const { send, amount, onchangeText, transferFrom, emailTo, password, loading, success, error } = this.props;  
 
         return (
             <div className="wrapper">
@@ -49,7 +49,7 @@ class Send extends Component {
                     <br/>
                     <section className="content container-fluid bad-bad-container-2">
                         <Info />
-                        <Form className="bad-bad-form" send={send} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} />
+                        <Form className="bad-bad-form" send={send} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} emailTo={emailTo} password={password} loading={loading} success={success} error={error} />
                     </section>
                 </div>
                 <Footer/>
