@@ -7,33 +7,6 @@ import NavUser from './NavUser';
 
 import Logo from './../../assets/img/logo.png';
 
-class DisplayConn extends React.Component {
-    state = {
-        hidden: ''
-    }
-    
-    componentDidMount() {
-        setTimeout(() => { this.setState({ hidden: 'hidden' }) }, 7000)
-    }
-
-    render() {
-        return navigator.onLine ? '' : (
-            <div className={'header box '+ this.state.hidden} style={{ background: 'black', borderRadius: 0, marginTop: -3}}>
-                <center style={{ color: 'white' }}>
-                    <span className="fa fa-circle text-danger"></span>&nbsp; &nbsp; 
-                    Portal Online is Offline 
-                    <div className="box-tools pull-right">
-                        <button type="button" className="btn btn-box-tool pull-right" style={{ marginTop: -6 }} data-widget="remove">
-                            <i className="fa fa-times" style={{ fontSize: 16, color: 'white' }}></i>
-                        </button>
-                    </div>
-                </center>
-            </div>
-        )
-    }
-    
-}
-
 export default function Header(props) {
     const {hasAuth} = props;
     return (
@@ -45,7 +18,7 @@ export default function Header(props) {
                         <img src={Logo} style={{ width: 30, height: 30 }} alt="logo" />
                     </span>
                     <span className="logo-lg">
-                        <img src={Logo} style={{ width: 30, height: 30 }} alt="logo" /> <b>Portal</b> Online
+                        <b>Portal</b> Online
                     </span>
                 </Link>
 
@@ -91,7 +64,6 @@ export default function Header(props) {
                         </ul>
                     </div>
                 </nav>
-                <DisplayConn />
             </header>
         </React.Fragment>
     );

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import SideBar from './../components/Sidebar/index';
-
 import Form from '../components/InterWallet/Form';
 import Info from '../components/InterWallet/Info';
-import Footer from '../components/Footer';
 
 import './pages.css';
 
@@ -63,8 +60,6 @@ class InterWallet extends Component {
                         </div>
                     </section>
                 </div>
-                <Footer />
-                <SideBar hasAuth={this.props.hasAuth} />
             </div>
         );
     }

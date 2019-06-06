@@ -13,7 +13,7 @@ const Form = props => {
             
             <div className="col-md-6 col-xs-12 col-sm-7 col-lg-5">
 
-                { error ? <div className="alert alert-danger">{error}</div> : null}
+                { error ? <div className="alert alert-danger" style={{ marginTop: 10 }}>{error}</div> : null}
                 { success ? <div className="alert alert-success">{success}</div> : null}
 
                 <div className="box box-primary">
