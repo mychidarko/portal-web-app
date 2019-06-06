@@ -131,8 +131,9 @@ export default class Layout extends React.Component {
                         this.setState({ loading: false });
                     }
                 })
-                .catch((err) => {
-                    this.setState({ error:  err });
+                .catch(() => {
+                    this.setState({ error:  "You're currently offline" });
+                    this.setState({ loading: false });
                     setTimeout(() => {
                         this.setState({ error: "" })
                     }, 3000);
@@ -193,8 +194,12 @@ export default class Layout extends React.Component {
                         this.setState({ error: "An error occured" });
                     }
                 })
-                .catch((error) => {
-                    this.setState({ error })
+                .catch(() => {
+                    this.setState({ error: "You're currently offline" });
+                    this.setState({ loading: false });
+                    setTimeout(() => {
+                        this.setState({ error: "" });
+                    }, 3000);
                 });
         }
     }
@@ -210,12 +215,16 @@ export default class Layout extends React.Component {
             config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
             data
         })
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                this.setState({ error: "Invalid credentials" });
-            });
+        .then((response) => {
+            console.log(response);
+        })
+        .catch(() => {
+            this.setState({ error: "You're currently offline" });
+            this.setState({ loading: false });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
+        });
     }
 
     integrateMobile(e) {
@@ -247,6 +256,10 @@ export default class Layout extends React.Component {
         })
         .catch(() => {
             this.setState({ error: "Network error" });
+            this.setState({ loading: false });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
         });
     }
 
@@ -402,6 +415,8 @@ export default class Layout extends React.Component {
             loading: false,
             success: ""
         });
+
+        return <Redirect to="/auth/login" />;
     }
 
     onchangeText(e) {
@@ -482,10 +497,10 @@ function RouterView(props) {
                 return <Deposit hasAuth={hasAuth} />
             }} />
             <Route path="/interwallet" render={() => {
-                return <Interwallet interwallet={interwallet} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} />
+                return <Interwallet interwallet={interwallet} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} hasAuth={hasAuth} />
             }} />
             <Route path="/send" render={() => {
-                return <Send send={send} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} emailTo={emailTo} password={password} loading={loading} success={success} error={error} />
+                return <Send send={send} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} emailTo={emailTo} password={password} loading={loading} success={success} error={error} hasAuth={hasAuth} />
             }} />
             <Route path="/auth/login" render={() => {
                 return <Login hasAuth={hasAuth} login={login} error={error} onchangeText={onchangeText} email={email} password={password} loading={loading} emailError={emailError} passwordError={passwordError} />

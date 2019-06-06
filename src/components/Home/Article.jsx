@@ -11,12 +11,12 @@ const Article = props => {
                     <div className="user-block">
                         <img className="img-circle" src={Avatar} style={{ marginTop: 8 }} alt="User Pic"/>
                         <span className="username h4">
-                            <a href={data.articles[index].url}>
-                                {data.articles[index].title}
+                            <a href={data.url}>
+                                {data.title}
                             </a>
                         </span>
                         <span className="description">
-                            Shared publicly, {data.articles[index].source.name} - {data.articles[index].publishedAt}
+                            Shared publicly, {data.source.name} - {data.publishedAt}
                         </span>
                     </div>
                     <div className="box-tools">
@@ -29,18 +29,25 @@ const Article = props => {
                     </div>
                 </div>
                 <div className="box-body">
-                    <img className="img-responsive pad" src={data.articles[index].urlToImage} alt="News Img"/>
-                    <p>{data.articles[index].content}</p>
+                    <img className="img-responsive pad" src={data.urlToImage} alt="News Img"/>
+                    <br/>
+                    <div className="container-fluid">
+                        <h3>{data.title}</h3>
+                    </div>
+                    <p className="container-fluid">{data.content}</p>
+                    <br/>
 
                     {/** Maybe I'll add something here */}
 
-                    <button type="button" className="btn btn-default btn-xs">
-                        <i className="fa fa-share"></i> Share
-                    </button>
-                    <button type="button" className="btn btn-default btn-xs">
-                        <i className="fa fa-thumbs-o-up"></i> Like
-                    </button>
-                    <span className="pull-right text-muted">{data.articles[index].likes} likes - 3 comments</span>
+                    <div className="container-fluid">
+                        <button type="button" className="btn btn-default btn-xs">
+                            <i className="fa fa-share"></i> Share
+                        </button>
+                        <button type="button" className="btn btn-default btn-xs">
+                            <i className="fa fa-thumbs-o-up"></i> Like
+                        </button>
+                    <span className="pull-right text-muted">{data.likes} likes - 3 comments</span>
+                    </div>
                 </div>
             </div>
         </div>

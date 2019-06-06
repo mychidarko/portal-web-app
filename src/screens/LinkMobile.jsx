@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import Form from './../components/LinkMobile/Form';
 import Info from './../components/LinkMobile/Info';
@@ -14,10 +14,10 @@ class LinkMobile extends Component {
         }
     }
     render() {
-        const { mobile, onchangeText, linkMobile, success } = this.props;
+        const { hasAuth, mobile, onchangeText, linkMobile, success } = this.props;
         
 
-        return (
+        return hasAuth ? (
             <div className="wrapper">
                 <div className="content-wrapper">
                     <section className="content-header hidden-xs">
@@ -64,7 +64,7 @@ class LinkMobile extends Component {
                     </section>
                 </div>
             </div>
-        );
+        ) : <Redirect to="/auth/login" />;
     }
 }
 

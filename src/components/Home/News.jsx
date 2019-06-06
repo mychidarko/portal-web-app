@@ -11,8 +11,8 @@ class News extends Component {
                     {
                         url: 'https://newsapi.org/id',
                         title: 'Article 1',
-                        content: 'The bunch body of the news thingy from the api is suppposed to go here',
-                        urlToImage: './../../assets/img/index.jpg',
+                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati illo alias! Perferendis molestias voluptatum asperiores vitae, iste exercitationem nobis perspiciatis rerum repellendus culpa aliquam vel laborum officiis, rem odit quas. Vitae tenetur beatae cupiditate reprehenderit suscipit quos pariatur voluptas.',
+                        urlToImage: 'https://lorempixel.com/600/300/city/',
                         source: {
                             name: 'Source Name'
                         },
@@ -23,8 +23,8 @@ class News extends Component {
                     {
                         url: 'https://newsapi.org/id',
                         title: 'Article 2',
-                        content: 'The bunch body of the news thingy from the api is suppposed to go here',
-                        urlToImage: './../../assets/img/index.jpg',
+                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati illo alias! Perferendis molestias voluptatum asperiores vitae, iste exercitationem nobis perspiciatis rerum repellendus culpa aliquam vel laborum officiis, rem odit quas. Vitae tenetur beatae cupiditate reprehenderit suscipit quos pariatur voluptas.',
+                        urlToImage: 'https://lorempixel.com/600/300/city/',
                         source: {
                             name: 'Source Name'
                         },
@@ -35,8 +35,8 @@ class News extends Component {
                     {
                         url: 'https://newsapi.org/id',
                         title: 'Article 3',
-                        content: 'The bunch body of the news thingy from the api is suppposed to go here',
-                        urlToImage: './../../assets/img/index.jpg',
+                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati illo alias! Perferendis molestias voluptatum asperiores vitae, iste exercitationem nobis perspiciatis rerum repellendus culpa aliquam vel laborum officiis, rem odit quas. Vitae tenetur beatae cupiditate reprehenderit suscipit quos pariatur voluptas.',
+                        urlToImage: 'https://lorempixel.com/600/300/city/',
                         source: {
                             name: 'Source Name'
                         },
@@ -47,8 +47,8 @@ class News extends Component {
                     {
                         url: 'https://newsapi.org/id',
                         title: 'Article 4',
-                        content: 'The bunch body of the news thingy from the api is suppposed to go here',
-                        urlToImage: './../../assets/img/index.jpg',
+                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati illo alias! Perferendis molestias voluptatum asperiores vitae, iste exercitationem nobis perspiciatis rerum repellendus culpa aliquam vel laborum officiis, rem odit quas. Vitae tenetur beatae cupiditate reprehenderit suscipit quos pariatur voluptas.',
+                        urlToImage: 'https://lorempixel.com/600/300/city/',
                         source: {
                             name: 'Source Name'
                         },
@@ -66,10 +66,9 @@ class News extends Component {
 
         return (
             <div className="row">
-                <Article data={data} index={0} />
-                <Article data={data} index={1} />
-                <Article data={data} index={2} />
-                <Article data={data} index={3} />
+                {this.state.data.articles.map(article => (
+                    <Article data={article} />
+                ))}
             </div>
          );
     }
