@@ -17,6 +17,8 @@ class Send extends Component {
         }
     }
     render() { 
+        const { send, amount, onchangeText, transferFrom, transferTo, password, loading, success, error } = this.props;  
+
         return (
             <div className="wrapper">
                 <div className="content-wrapper">
@@ -47,18 +49,7 @@ class Send extends Component {
                     <br/>
                     <section className="content container-fluid bad-bad-container-2">
                         <Info />
-                        <Form className="bad-bad-form" />
-                        <div className="container hidden-md hidden-lg">
-                            <h2>How it works</h2>
-                            <p>
-                                <li>Enter the amount you want to send.</li>
-                                <li>Select the wallet type you want to transfer the money from.</li>
-                                <li>Enter the '<code>Portal Address</code>' of the user you want to send money to.</li>
-                                <li>Confirm the <code>Portal Address</code> of the  user.</li>
-                                <li>Enter your password.</li>
-                                <li>Confirm the transfer.</li>
-                            </p>
-                        </div>
+                        <Form className="bad-bad-form" send={send} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} />
                     </section>
                 </div>
                 <Footer/>

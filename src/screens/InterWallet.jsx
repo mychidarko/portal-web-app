@@ -47,17 +47,6 @@ class InterWallet extends Component {
                     <section className="content container-fluid bad-bad-container">
                         <Info />
                         <Form className="bad-bad-form" interwallet={interwallet} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} />
-
-                        <div className="container hidden-md hidden-lg">
-                            <h2>How it works</h2>
-                            <p>
-                                <li>Enter the amount you want to send.</li>
-                                <li>Select the wallet type you want to transfer the money from.</li>
-                                <li>Select the wallet type you want to transfer the money to.</li>
-                                <li>Enter your password.</li>
-                                <li>Confirm the transfer.</li>
-                            </p>
-                        </div>
                     </section>
                 </div>
             </div>

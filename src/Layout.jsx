@@ -251,21 +251,64 @@ export default class Layout extends React.Component {
 
     sendCash(e) {
         e.preventDefault();
-        let data = JSON.stringify({ "name": "send", "param": { "email_from": this.state.email, "wallet_to": "crypto", "email_to": "seth@gmail.com", "wallet_from": "mobile_money", "amount": this.state.amount } });
+        let data = JSON.stringify({ "name": "send", "param": { "email_from": localStorage.getItem("portal-app-userEmail"), "wallet_to": this.state.transferTo, "to_id": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9", "wallet_from": this.state.transferFrom, "from_id": localStorage.getItem("portal-app-userMobileNumber"), "amount": this.state.amount } });
 
-        axios({
-            method: 'post',
-            // url: "http://localhost/portalonlineapi/api/v1/",
-            url: "https://portalonlineapi.000webhostapp.com/api/v1/",
-            config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
-            data
-        })
+        if (this.state.amount === "") {
+            this.setState({ error: "Please enter amount" });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
+        } else if (this.state.transferFrom === "transfer_from" || this.state.transferFrom === "") {
+            this.setState({ error: "Select a wallet to transfer funds from" });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
+        } else if (this.state.transferTo === "transfer_to" || this.state.transferTo === "") {
+            this.setState({ error: "Select a wallet to transfer funds to" });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
+        } else if (this.state.password === "") {
+            this.setState({ error: "Please enter your password" });
+            setTimeout(() => {
+                this.setState({ error: "" });
+            }, 3000);
+        } else {
+            this.setState({ loading: true });
+
+            axios({
+                method: 'post',
+                // url: "http://localhost/portalonlineapi/api/v1/",
+                url: "https://portalonlineapi.000webhostapp.com/api/v1/",
+                config: { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } },
+                data
+            })
             .then((response) => {
-                console.log(response.data)
+                console.log(response.data);
+                if (response.data.status === 103) {
+                    this.setState({ error: response.data.message });
+                    setTimeout(() => {
+                        this.setState({ error: "" });
+                    }, 3000);
+                    this.setState({ loading: false });
+                } else if (response.data.status === 200) {
+                    this.setState({
+                        success: response.data.result.message,
+                        loading: false
+                    });
+                    setTimeout(() => {
+                        this.setState({ success: "" });
+                    }, 4000);
+                }
             })
             .catch(() => {
-                this.setState({ error: "Invalid credentials" });
+                this.setState({ error: "You're currently offline, please retry when connected" });
+                this.setState({ loading: false });
+                setTimeout(() => {
+                    this.setState({ error: "" });
+                }, 3000);
             });
+        }
     }
 
     interWallet(e) {
@@ -320,7 +363,7 @@ export default class Layout extends React.Component {
                     }, 4000);
                 }
             })
-            .catch((error) => {
+            .catch(() => {
                 this.setState({ error: "You're currently offline, please retry when connected" });
                 this.setState({ loading: false });
                 setTimeout(() => {
@@ -378,6 +421,7 @@ export default class Layout extends React.Component {
                             onchangeText={this.onchangeText}
                             mobile={mobile}
                             interwallet={this.interWallet} 
+                            send={this.sendCash}
                             amount={amount} 
                             transferFrom={transferFrom} 
                             transferTo={transferTo} 
@@ -412,7 +456,7 @@ export default class Layout extends React.Component {
 
 
 function RouterView(props) {
-    const { hasAuth, username, email, password, password2, error, login, register, onchangeText, loading, linkMobile, emailError, passwordError, usernameError, mobile, success, amount, transferFrom, transferTo, interwallet } = props;
+    const { hasAuth, username, email, password, password2, error, login, register, onchangeText, loading, linkMobile, emailError, passwordError, usernameError, mobile, success, amount, transferFrom, transferTo, interwallet, send } = props;
 
     return (
         <Switch>
@@ -433,7 +477,7 @@ function RouterView(props) {
                 return <Interwallet interwallet={interwallet} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} />
             }} />
             <Route path="/send" render={() => {
-                return <Send hasAuth={hasAuth} />
+                return <Send send={send} amount={amount} onchangeText={onchangeText} transferFrom={transferFrom} transferTo={transferTo} password={password} loading={loading} success={success} error={error} />
             }} />
             <Route path="/auth/login" render={() => {
                 return <Login hasAuth={hasAuth} login={login} error={error} onchangeText={onchangeText} email={email} password={password} loading={loading} emailError={emailError} passwordError={passwordError} />
