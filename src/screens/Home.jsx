@@ -7,7 +7,7 @@ import InfoBoxes from './../components/Home/InfoBoxes';
 import MoneyUsage from '../components/Home/MoneyUsage';
 import Expenses from './../components/Home/Expenses';
 import Contacts from '../components/Home/Contacts';
-import RequestCash from '../components/Home/RequestCash';
+// import RequestCash from '../components/Home/RequestCash';
 import News from '../components/Home/News';
 import Footer from './../components/Footer';
 

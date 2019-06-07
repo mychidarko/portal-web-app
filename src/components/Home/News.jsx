@@ -66,7 +66,7 @@ class News extends Component {
 
         return (
             <div className="row">
-                {this.state.data.articles.map(article => (
+                {data.articles.map(article => (
                     <Article data={article} />
                 ))}
             </div>

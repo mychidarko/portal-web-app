@@ -2,7 +2,7 @@ import React from 'react';
 import Avatar from './../../assets/img/avatars/avatar04.png'; 
 
 const Article = props => {
-    const { data, index } = props;
+    const { data } = props;
 
     return ( 
         <div className="col-md-6">

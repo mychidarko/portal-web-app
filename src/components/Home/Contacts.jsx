@@ -25,7 +25,7 @@ export default () => {
             </div>
             
             <div className="box-body no-padding" style={{ height: 332 , width: "100%" }}>
-              {contacts == 0 ? <NoContacts /> : <Contacts />}
+              {contacts === 0 ? <NoContacts /> : <Contacts />}
             </div>
             <div className="box-footer text-center bg-yellow">
               <Link to="/contacts/all" className="uppercase ajax" style={{ color: 'white' }}>View All Contacts</Link>
