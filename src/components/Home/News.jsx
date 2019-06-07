@@ -67,7 +67,7 @@ class News extends Component {
         return (
             <div className="row">
                 {data.articles.map(article => (
-                    <Article data={article} />
+                    <Article data={article} key={article.id} />
                 ))}
             </div>
          );
